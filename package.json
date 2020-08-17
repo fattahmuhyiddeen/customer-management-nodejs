@@ -1,0 +1,35 @@
+{
+  "name": "hotel",
+  "version": "1.0.0",
+  "description": "Simple guide deploying a simple server to Heroku.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nielsenjared/node-express-heroku-deployment.git"
+  },
+  "keywords": [
+    "simple"
+  ],
+  "author": "Jared Nielsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nielsenjared/node-express-heroku-deployment-guide/issues"
+  },
+  "homepage": "https://github.com/nielsenjared/node-express-heroku-deployment-guide#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.2",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
+  }
+}
