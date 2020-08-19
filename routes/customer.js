@@ -1,21 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var Customer = require('../database/models/customer')
-
+var db = require('../database');
 // Home page route.
 router.get('/', function (req, res) {
   // res.send('page');
-  Customer.create({
+  db.customer.create({
     name: 'ABC SDN',
     phone: '0143435345',
     email: 'aa@gmail.com',
     gps: '3.132,101.23435'
   }).then(data => {
+    console.log('data', data)
     // Send created user to client
-    res.send(data.id);
-    // return data.id;
+    // res.send(data.id);
+    res.send({ id: data.id });
   }).catch(function (err) {
     console.log("create failed with error: " + err);
+    res.sendStatus(200);
+    // res.send(err);
     return 0;
   });
 })

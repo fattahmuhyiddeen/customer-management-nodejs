@@ -14,10 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Customer.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     name: DataTypes.STRING,
     phone: DataTypes.STRING,
     email: DataTypes.STRING,
-    gps: DataTypes.STRING
+    gps: DataTypes.STRING,
+    createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    updatedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   }, {
     sequelize,
     modelName: 'Customer',
