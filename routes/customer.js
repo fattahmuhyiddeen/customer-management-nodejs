@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../database');
 // Home page route.
 router.get('/', function (req, res) {
+
   // res.send('page');
   db.customer.create({
     name: 'ABC SDN',
@@ -16,7 +17,7 @@ router.get('/', function (req, res) {
     res.send({ id: data.id });
   }).catch(function (err) {
     console.log("create failed with error: " + err);
-    res.sendStatus(200);
+    res.sendStatus(500);
     // res.send(err);
     return 0;
   });
