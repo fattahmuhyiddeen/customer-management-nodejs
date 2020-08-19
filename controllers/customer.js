@@ -1,10 +1,11 @@
 const db = require('../database');
 function create(req, res) {
+  const { name, phone, email, gps } = req.body;
   db.customer.create({
-    name: 'ABC SDN',
-    phone: '0143435345',
-    email: 'aa@gmail.com',
-    gps: '3.132,101.23435'
+    name,
+    phone,
+    email,
+    gps
   }).then(data => {
     console.log('data', data)
     // Send created user to client
