@@ -24,6 +24,7 @@ function getAll(req, res) {
     return 0;
   });
 }
+
 function remove(req, res) {
   const id = req.params.id;
   db.customer.destroy({ where: { id } })
@@ -32,6 +33,15 @@ function remove(req, res) {
     });
 }
 
+function update(req, res) {
+  const id = req.params.id;
+  const { updates } = req.body;
+  db.customer.find({ where: { id } })
+    .then(c => c.updateAttributes(updates)).then(data => {
+      res.send({ data });
+    });
+}
 
 
-module.exports = { create, getAll, remove };
+
+module.exports = { create, getAll, remove, update };
