@@ -24,5 +24,14 @@ function getAll(req, res) {
     return 0;
   });
 }
+function remove(req, res) {
+  const id = req.params.id;
+  db.customer.destroy({ where: { id } })
+    .then(data => {
+      res.send({ data });
+    });
+}
 
-module.exports = { create, getAll };
+
+
+module.exports = { create, getAll, remove };

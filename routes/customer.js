@@ -4,4 +4,5 @@ const customer = require('../controllers/customer')
 // Home page route.
 router.post('/', customer.create);
 router.get('/', customer.getAll);
+router.delete('/:id', customer.remove);
 module.exports = router;
