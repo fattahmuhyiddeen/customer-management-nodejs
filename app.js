@@ -3,8 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const cors = require('cors');
-const passport = require('passport'), OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
-const home = require('./routes/home.js');
+const passport = require('passport');
+const customer = require('./routes/customer.js');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -58,7 +58,8 @@ passport.use(
     {
       secretOrKey: `${secret}`,
 
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: require('passport-jwt').ExtractJwt.fromAuthHeaderAsBearerToken(),
+      // jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     },
     // eslint-disable-next-line consistent-return
     async (token, done) => {
@@ -103,7 +104,7 @@ app.get('/auth/provider/callback',
   }
   ));
 
-app.use('/home', home);
+app.use('/customer', customer);
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)
 })
