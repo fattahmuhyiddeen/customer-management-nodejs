@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // for parsing multipart/form-data
 app.use(upload.array());
+app.use(express.static('public'));
 //end middlewares
 
 const secret = "kdfjngkjdngjkenrge";
