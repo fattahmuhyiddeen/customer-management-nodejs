@@ -4,14 +4,22 @@ const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const cors = require('cors');
 const passport = require('passport');
-const customer = require('./routes/customer.js');
+const route_lists = require('./routes');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+
+const multer = require('multer');
+const upload = multer();
 // middlewares
 app.use(cors());
+// for parsing application/json
 app.use(bodyParser.json());
+// for parsing application/xwww-
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// for parsing multipart/form-data
+app.use(upload.array());
 //end middlewares
 
 const secret = "kdfjngkjdngjkenrge";
@@ -104,7 +112,7 @@ app.get('/auth/provider/callback',
   }
   ));
 
-app.use('/customer', customer);
+app.use('/api', route_lists);
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)
 })

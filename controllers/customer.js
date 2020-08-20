@@ -35,11 +35,16 @@ function remove(req, res) {
 
 function update(req, res) {
   const id = req.params.id;
-  const { updates } = req.body;
-  db.customer.find({ where: { id } })
-    .then(c => c.updateAttributes(updates)).then(data => {
-      res.send({ data });
-    });
+  const body = req.body;
+  console.log(body)
+  db.customer.update(body, { where: { id } })
+    .then(() => {
+      res.send({ data: 'success' });
+    })
+    .catch((err) => {
+      res.status(400);
+      res.send({ err });
+    })
 }
 
 
