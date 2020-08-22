@@ -66,7 +66,6 @@ passport.use(
   new JwtStrategy(
     {
       secretOrKey: `${secret}`,
-
       jwtFromRequest: require('passport-jwt').ExtractJwt.fromAuthHeaderAsBearerToken(),
       // jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     },
