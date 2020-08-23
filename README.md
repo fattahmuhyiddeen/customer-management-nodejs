@@ -7,9 +7,7 @@
 1. fresh migrate
 
 ```bash
-npx sequelize-cli db:migrate:undo:all
-npx sequelize-cli db:migrate
-npx sequelize-cli db:seed:all
+npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all
 ```
 
 ### to run the app
