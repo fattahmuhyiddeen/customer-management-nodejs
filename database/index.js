@@ -33,11 +33,10 @@ db.sequelize = sequelize;
 //Models/tables
 db.users = require('./models/user.js')(sequelize, Sequelize);
 db.customer = require('./models/customer.js')(sequelize, Sequelize);
+db.task = require('./models/task.js')(sequelize, Sequelize);
 
 //Relations
-// db.comments.belongsTo(db.posts);
-// db.posts.hasMany(db.comments);
-// db.posts.belongsTo(db.users);
-// db.users.hasMany(db.posts);
+db.task.belongsTo(db.customer);
+db.customer.hasMany(db.task);
 
 module.exports = db;
