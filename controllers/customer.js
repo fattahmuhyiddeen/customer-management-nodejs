@@ -8,7 +8,7 @@ function create(req, res) {
     google_map_link,
     address
   }).then(data => {
-    res.send({ id: data.id });
+    res.send({ data });
   }).catch(function (error) {
     console.log("create failed with error: " + error);
     res.status(500).send({ error });
@@ -18,6 +18,16 @@ function create(req, res) {
 
 function getAll(req, res) {
   db.customer.findAll().then(data => {
+    res.send({ data });
+  }).catch(function (error) {
+    console.log("create failed with error: " + error);
+    res.status(500).send({ error });
+    return 0;
+  });
+}
+function getOne(req, res) {
+  const id = req.params.id;
+  db.customer.findOne({ where: { id } }).then(data => {
     res.send({ data });
   }).catch(function (error) {
     console.log("create failed with error: " + error);
@@ -49,4 +59,4 @@ function update(req, res) {
 
 
 
-module.exports = { create, getAll, remove, update };
+module.exports = { create, getAll, remove, update, getOne };
