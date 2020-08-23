@@ -17,7 +17,10 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      gps: {
+      address: {
+        type: Sequelize.STRING
+      },
+      google_map_link: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -26,6 +29,10 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
+        allowNull: true,
         type: Sequelize.DATE
       }
     });

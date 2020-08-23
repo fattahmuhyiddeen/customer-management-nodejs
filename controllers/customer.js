@@ -1,16 +1,17 @@
 const db = require('../database');
 function create(req, res) {
-  const { name, phone, email, gps } = req.body;
+  const { name, phone, email, google_map_link, address } = req.body;
   db.customer.create({
     name,
     phone,
     email,
-    gps
+    google_map_link,
+    address
   }).then(data => {
     res.send({ id: data.id });
-  }).catch(function (err) {
-    console.log("create failed with error: " + err);
-    res.sendStatus(500);
+  }).catch(function (error) {
+    console.log("create failed with error: " + error);
+    res.status(500).send({ error });
     return 0;
   });
 }
@@ -18,9 +19,9 @@ function create(req, res) {
 function getAll(req, res) {
   db.customer.findAll().then(data => {
     res.send({ data });
-  }).catch(function (err) {
-    console.log("create failed with error: " + err);
-    res.sendStatus(500);
+  }).catch(function (error) {
+    console.log("create failed with error: " + error);
+    res.status(500).send({ error });
     return 0;
   });
 }
@@ -41,9 +42,8 @@ function update(req, res) {
     .then(() => {
       res.send({ data: 'success' });
     })
-    .catch((err) => {
-      res.status(400);
-      res.send({ err });
+    .catch((error) => {
+      res.status(400).send({ error });
     })
 }
 
