@@ -2,16 +2,19 @@ const db = require('../database');
 const moment = require('moment');
 const task = require('../database/models/task');
 function create(req, res) {
-  const { name, phone, email, google_map_link, address, frequency, start_date, end_date } = req.body;
+  const { name, phone, email, google_map_link, service, address, frequency, start_date, end_date } = req.body;
   db.customer.create({
     name,
     phone,
     email,
     google_map_link,
-    address
+    address,
+    service,
+    frequency,
+    start_date,
+    end_date
   }).then(data => {
     if (!!frequency && !!start_date && !!end_date) {
-      console.log('masuk sini')
       let num = 0;
       let unit = '';
       if (frequency == '2weeks') {
@@ -91,9 +94,18 @@ function remove(req, res) {
 
 function update(req, res) {
   const id = req.params.id;
-  const body = req.body;
-  console.log(body)
-  db.customer.update(body, { where: { id } })
+  const { name, phone, email, google_map_link, address, service, frequency, start_date, end_date } = req.body;
+  db.customer.update({
+    name,
+    phone,
+    email,
+    google_map_link,
+    address,
+    frequency,
+    start_date,
+    end_date,
+    service
+  }, { where: { id } })
     .then(() => {
       res.send({ data: 'success' });
     })

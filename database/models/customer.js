@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     address: DataTypes.STRING,
     google_map_link: DataTypes.STRING,
+    service: DataTypes.STRING,
+    frequency: DataTypes.STRING,
+    start_date: DataTypes.DATE,
+    end_date: DataTypes.DATE,
     createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     updatedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   }, {

@@ -23,6 +23,10 @@ module.exports = {
       google_map_link: {
         type: Sequelize.STRING
       },
+      frequency: Sequelize.STRING,
+      service: Sequelize.STRING,
+      start_date: Sequelize.DATE,
+      end_date: Sequelize.DATE,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
