@@ -17,7 +17,10 @@ function create(req, res) {
     if (!!frequency && !!start_date && !!end_date) {
       let num = 0;
       let unit = '';
-      if (frequency == '2weeks') {
+      if (frequency == 'once') {
+        // unit = 'w';
+        // num = 2;
+      } else if (frequency == '2weeks') {
         unit = 'w';
         num = 2;
       } else if (frequency == '1month') {
@@ -65,7 +68,11 @@ function create(req, res) {
 }
 
 function getAll(req, res) {
-  db.customer.findAll().then(data => {
+  db.customer.findAll({
+    order: [
+      ['id', 'DESC'],
+    ],
+  }).then(data => {
     res.send({ data });
   }).catch(function (error) {
     console.log("create failed with error: " + error);
