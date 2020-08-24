@@ -37,34 +37,29 @@ function create(req, res) {
         num = 4;
       }
 
-      console.log('unit', unit)
-      console.log('num', num)
-
-
       const tasks = [{ CustomerId: data.id, date: start_date }];
-      let iterate_date = moment(start_date).clone();
-      while (iterate_date.isSameOrBefore(end_date)) {
-        iterate_date = iterate_date.add(num, unit);
-        tasks.push({ CustomerId: data.id, date: iterate_date.format('YYYY-MM-DD') });
+      if (frequency != 'once' && !!end_date) {
+        let iterate_date = moment(start_date).clone();
+        while (iterate_date.isSameOrBefore(end_date)) {
+          iterate_date = iterate_date.add(num, unit);
+          tasks.push({ CustomerId: data.id, date: iterate_date.format('YYYY-MM-DD') });
+        }
       }
-
-      console.log('tasks', tasks)
 
       db.task.bulkCreate(tasks).then(() => {
         res.send({ data });
-
       }).catch(function (error) {
         console.log("create failed with error: " + error);
         res.status(500).send({ error });
       });
-
+    } else {
+      res.status(400).send({ error: 'Wrong input' });
     }
   }).catch(function (error) {
     console.log("create failed with error: " + error);
     res.status(500).send({ error });
     return 0;
   });
-
 }
 
 function getAll(req, res) {
@@ -82,7 +77,7 @@ function getAll(req, res) {
 }
 function getOne(req, res) {
   const id = req.params.id;
-  db.customer.findOne({ where: { id } }).then(data => {
+  db.customer.findOne({ where: { id }, include: db.task }).then(data => {
     res.send({ data });
   }).catch(function (error) {
     console.log("create failed with error: " + error);
