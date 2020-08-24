@@ -14,7 +14,7 @@ function create(req, res) {
     start_date,
     end_date
   }).then(data => {
-    if (!!frequency && !!start_date && !!end_date) {
+    if (!!frequency && !!start_date && (frequency == 'once' || !!end_date)) {
       let num = 0;
       let unit = '';
       if (frequency == 'once') {
