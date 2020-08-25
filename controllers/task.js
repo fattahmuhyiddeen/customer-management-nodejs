@@ -1,10 +1,22 @@
 const db = require('../database');
+const { Op } = require("sequelize");
 
 function getAll(req, res) {
-  db.task.findAll().then(data => {
+  const { from, to } = req.query;
+  db.task.findAll({
+    where: {
+      date: {
+        [Op.between]: [from, to]
+      }
+    },
+    include: [{
+      model: db.customer,
+      required: true
+    }]
+  }).then(data => {
     res.send({ data });
   }).catch(function (error) {
-    console.log("create failed with error: " + error);
+    console.log(error)
     res.status(500).send({ error });
     return 0;
   });
