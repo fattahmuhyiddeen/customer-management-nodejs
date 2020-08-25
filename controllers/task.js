@@ -3,12 +3,18 @@ const { Op } = require("sequelize");
 
 function getAll(req, res) {
   const { from, to } = req.query;
-  db.task.findAll({
-    where: {
-      date: {
-        [Op.between]: [from, to]
+  let params = {}
+  if (!!from && !!to) {
+    params = {
+      where: {
+        date: {
+          [Op.between]: [from, to]
+        }
       }
-    },
+    }
+  }
+  db.task.findAll({
+    ...params,
     include: [{
       model: db.customer,
       required: true
