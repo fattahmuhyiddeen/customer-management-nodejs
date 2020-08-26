@@ -30,10 +30,10 @@ function getAll(req, res) {
 
 function remove(req, res) {
   const id = req.params.id;
-  // db.task.destroy({ where: { id } })
-  //   .then(data => {
-  //     res.send({ data });
-  //   });
+  db.task.destroy({ where: { id } })
+    .then(data => {
+      res.send({ data });
+    });
 }
 
 function update(req, res) {
