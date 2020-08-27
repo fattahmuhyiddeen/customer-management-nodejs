@@ -33,7 +33,6 @@ function remove(req, res) {
 function update(req, res) {
   const { id } = req.params;
   const body = req.body;
-  console.log(body)
   db.task.update(body, { where: { id } })
     .then(() => res.send({ data: 'success' }))
     .catch((error) => res.status(400).send({ error }))

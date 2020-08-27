@@ -2,7 +2,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return Promise.all([
       queryInterface.addColumn(
-        'Task',
+        'Tasks',
         'description',
         {
           allowNull: true,
@@ -10,7 +10,7 @@ module.exports = {
         }
       ),
       queryInterface.addColumn(
-        'Task',
+        'Tasks',
         'status',
         {
           allowNull: true,
@@ -22,8 +22,8 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.removeColumn('Task', 'description'),
-      queryInterface.removeColumn('Task', 'status'),
+      queryInterface.removeColumn('Tasks', 'description'),
+      queryInterface.removeColumn('Tasks', 'status'),
     ]);
   }
 };
