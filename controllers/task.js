@@ -19,36 +19,33 @@ function getAll(req, res) {
       model: db.customer,
       required: true
     }]
-  }).then(data => {
-    res.send({ data });
-  }).catch(function (error) {
-    console.log(error)
-    res.status(500).send({ error });
-    return 0;
-  });
+  }).then(data => res.send({ data }))
+    .catch(e => res.status(500).send({ error: e }));
 }
 
 function remove(req, res) {
-  const id = req.params.id;
+  const { id } = req.params;
   db.task.destroy({ where: { id } })
-    .then(data => {
-      res.send({ data });
-    });
+    .then(data => res.send({ data }))
+    .catch(e => res.status(400).send({ error: e }));
 }
 
 function update(req, res) {
-  const id = req.params.id;
+  const { id } = req.params;
   const body = req.body;
   console.log(body)
-  // db.task.update(body, { where: { id } })
-  //   .then(() => {
-  //     res.send({ data: 'success' });
-  //   })
-  //   .catch((error) => {
-  //     res.status(400).send({ error });
-  //   })
+  db.task.update(body, { where: { id } })
+    .then(() => res.send({ data: 'success' }))
+    .catch((error) => res.status(400).send({ error }))
+}
+
+function getOne(req, res) {
+  const { id } = req.params;
+  db.task.findOne({ where: { id }, include: db.customer })
+    .then(data => res.send({ data }))
+    .catch(e => res.status(500).send({ error: e }));
 }
 
 
 
-module.exports = { getAll, remove, update };
+module.exports = { getAll, remove, update, getOne };
