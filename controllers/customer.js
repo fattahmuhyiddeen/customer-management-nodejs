@@ -86,7 +86,11 @@ function getAll(req, res) {
 }
 function getOne(req, res) {
   const id = req.params.id;
-  db.customer.findOne({ where: { id }, include: db.task }).then(data => {
+  db.customer.findOne({
+    where: { id }, include: db.task, order: [
+      [db.task, 'date', 'asc']
+    ]
+  }).then(data => {
     res.send({ data });
   }).catch(function (error) {
     console.log("create failed with error: " + error);
