@@ -20,6 +20,9 @@ function create(req, res) {
       if (frequency == 'once') {
         // unit = 'w';
         // num = 2;
+      } else if (frequency == '1week') {
+        unit = 'w';
+        num = 1;
       } else if (frequency == '2weeks') {
         unit = 'w';
         num = 2;
@@ -35,6 +38,12 @@ function create(req, res) {
       } else if (frequency == '4months') {
         unit = 'M';
         num = 4;
+      } else if (frequency == '5months') {
+        unit = 'M';
+        num = 5;
+      } else if (frequency == '6months') {
+        unit = 'M';
+        num = 6;
       }
 
       const tasks = [{ CustomerId: data.id, date: start_date }];
