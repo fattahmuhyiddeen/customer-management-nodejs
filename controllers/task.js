@@ -34,7 +34,7 @@ function update(req, res) {
   const { id } = req.params;
   const body = req.body;
   db.task.update(body, { where: { id } })
-    .then(() => res.send({ data: 'success' }))
+    .then(d => res.send({ data: d }))
     .catch((error) => res.status(400).send({ error }))
 }
 
