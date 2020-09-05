@@ -9,6 +9,7 @@ router.get('/task', task.getAll);
 router.get('/customer/:id', customer.getOne);
 router.get('/task/:id', task.getOne);
 router.post('/task/:id', task.update);
+router.post('/task', task.create);
 router.delete('/customer/:id', customer.remove);
 router.delete('/task/:id', task.remove);
 router.post('/customer/:id', customer.update);

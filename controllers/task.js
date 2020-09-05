@@ -1,6 +1,11 @@
 const db = require('../database');
 const { Op } = require("sequelize");
 
+function create(req, res) {
+  const { customer_id, date, description, status } = req.body;
+  db.task.create({ CustomerId: customer_id, date, description, status }).then(data => res.send({ data }))
+    .catch(error => res.status(500).send({ error }));
+}
 function getAll(req, res) {
   const { from, to } = req.query;
   let params = {}
@@ -32,8 +37,8 @@ function remove(req, res) {
 
 function update(req, res) {
   const { id } = req.params;
-  const body = req.body;
-  db.task.update(body, { where: { id } })
+  const { date, description, status } = req.body;
+  db.task.update({ date, description, status }, { where: { id } })
     .then(d => res.send({ data: d }))
     .catch((error) => res.status(400).send({ error }))
 }
@@ -46,5 +51,4 @@ function getOne(req, res) {
 }
 
 
-
-module.exports = { getAll, remove, update, getOne };
+module.exports = { getAll, remove, update, getOne, create };
