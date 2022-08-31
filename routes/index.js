@@ -3,6 +3,7 @@ var router = express.Router();
 const customer = require('../controllers/customer');
 const task = require('../controllers/task');
 // Home page route.
+router.get('/xyz', (_, res) => res.send(process.env));
 router.post('/customer', customer.create);
 router.get('/customer', customer.getAll);
 router.get('/task', task.getAll);
